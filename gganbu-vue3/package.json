@@ -41,6 +41,7 @@
     "ora": "^6.0.1",
     "pkg-dir": "^5.0.0",
     "pluralize": "^8.0.0",
+    "portfinder": "^1.0.28",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4",
     "upath": "^2.0.1",

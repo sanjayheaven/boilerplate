@@ -17,6 +17,7 @@ import {
   getProjectConfig,
   getResolvedControllerDir,
   getServerConfig,
+  wrappedServerConfig,
 } from "./config"
 import { Route, Controller } from "./types/model"
 import { getGlobalMiddlewares, wrapController } from "./middleware"
@@ -98,8 +99,7 @@ export const createRouter = () => {
 
 export const App = new Koa()
 let server
-export const AppStart = async () => {
-  let { port } = getServerConfig()
+export const AppStart = async ({ port }) => {
   const routers = createRouter()
   App.use(async (ctx, next) => {
     await als.run({ ctx: ctx }, async () => {

@@ -1,12 +1,14 @@
 import * as chokidar from "chokidar"
 import { join, relative, resolve } from "upath"
-import { getResolvedSrcDir } from "../config"
+import { getResolvedSrcDir, wrappedServerConfig } from "../config"
 import { getProjectRoot } from "../util"
 import { fork } from "child_process"
 import { statSync, existsSync } from "fs"
 import Spin from "light-spinner"
-import * as chalk from "chalk"
 import { ProcessMessage } from "../types/cli"
+import { checkPort } from "./util"
+import { getServerConfig } from "../config"
+import { ServerConfig } from "../types/config"
 const Spinner = new Spin({ text: "Gganbu Starting" })
 
 // 状态库
@@ -22,7 +24,7 @@ let forked
 export const startWatch = () => {
   let resolvedSrcDir = getResolvedSrcDir()
   const watchAllowExts = [].concat(".ts")
-  
+
   const watcher = chokidar.watch(resolvedSrcDir, {
     ignored: (path, fsStats) => {
       if (path.includes("node_modules")) {
@@ -45,20 +47,40 @@ export const startWatch = () => {
     state.restarting = true
     restart().then(() => {
       let eventPath = `[${event}] ${relative(resolvedSrcDir, fileName)}`
-      console.log(`[ Gganbu ] Auto reload. ${chalk.hex("#666666")(eventPath)}`)
+      console.log(`[ Gganbu ] Auto reload. ${eventPath}`)
     })
   })
 }
 
 export const close = async () => {
+  state.hasStarted = false
   Spinner.stop()
-
   if (forked?.kill) {
     forked.kill()
   }
   forked = null
 }
+
 export const start = async () => {
+  let checkedPort
+  if (state.hasStarted) {
+    console.log("端口已启动")
+    return
+  }
+  console.log(checkedPort, 111111)
+  if (!state.hasStarted) {
+    // 第一次启动 需要检测端口
+    let serverConfig = getServerConfig()
+    let { port } = serverConfig
+    checkedPort = await checkPort(port)
+    console.log(checkedPort, "检测通过的端口")
+    // 重写 getServerConfig
+    wrappedServerConfig.getConfig = (): ServerConfig => {
+      return { ...serverConfig, port: checkedPort }
+    }
+    // return restart()
+    console.log(wrappedServerConfig, "2272", 91919)
+  }
   if (!state.hasWatched) {
     startWatch()
   }
@@ -68,9 +90,7 @@ export const start = async () => {
     Spinner.start()
     forked = fork(childPath, [], {
       cwd: getProjectRoot(),
-      env: {
-        MODELPATH,
-      },
+      env: { MODELPATH, SERVERPORT: checkedPort },
     })
     forked.on("message", (msg: ProcessMessage) => {
       if (msg.type == "started") {

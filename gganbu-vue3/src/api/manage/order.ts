@@ -1,7 +1,5 @@
 // 订单相关页面
 
-import { useContext } from "gganbu/dist/hook"
-import { wrapController } from "gganbu/dist/middleware"
 
 // const loadMiddleware = (middlewares, func) => {
 //   await compose([...middlewares, mafunc])
@@ -17,7 +15,7 @@ const logger = async (ctx, next) => {
 export const getInfo = async (data, data1?: any) => {
   return {
     data: data,
-    msg: "test1223",
+    msg: "test1",
   }
 }
 // getInfo.config = { middlewares: [logger] }
