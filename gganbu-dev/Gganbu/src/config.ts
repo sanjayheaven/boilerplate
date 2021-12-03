@@ -58,7 +58,9 @@ export const getResolvedSrcDir = () => {
 /**
  * 找到 controller 目录下的 configuration文件
  */
+
 export const getServerConfigPre = (): ServerConfig => {
+
   let resolvedContrtollerDir = getResolvedControllerDir()
   let jsFile = resolve(resolvedContrtollerDir, "configuration.js")
   let tsFile = resolve(resolvedContrtollerDir, "configuration.ts")
@@ -67,10 +69,12 @@ export const getServerConfigPre = (): ServerConfig => {
   return importFileDefault(filePath)
 }
 export const wrappedServerConfig = {
+  // 可以被重写
   getConfig: (): ServerConfig => {
     return getServerConfigPre()
   },
 }
+
 export const getServerConfig = () => {
   return wrappedServerConfig.getConfig()
 }

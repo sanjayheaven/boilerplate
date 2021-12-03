@@ -1,6 +1,10 @@
 import * as chokidar from "chokidar"
 import { join, relative, resolve } from "upath"
-import { getResolvedSrcDir, wrappedServerConfig } from "../config"
+import {
+  getResolvedSrcDir,
+  getServerConfigPre,
+  wrappedServerConfig,
+} from "../config"
 import { getProjectRoot } from "../util"
 import { fork } from "child_process"
 import { statSync, existsSync } from "fs"
@@ -53,33 +57,36 @@ export const startWatch = () => {
 }
 
 export const close = async () => {
-  state.hasStarted = false
   Spinner.stop()
   if (forked?.kill) {
-    forked.kill()
+    await forked.kill()
   }
   forked = null
+  state.hasStarted = false
 }
 
 export const start = async () => {
+  let serverConfig = getServerConfigPre()
+  let { port } = serverConfig
   let checkedPort
   if (state.hasStarted) {
     console.log("端口已启动")
     return
   }
-  console.log(checkedPort, 111111)
   if (!state.hasStarted) {
     // 第一次启动 需要检测端口
-    let serverConfig = getServerConfig()
-    let { port } = serverConfig
     checkedPort = await checkPort(port)
-    console.log(checkedPort, "检测通过的端口")
+    if (checkedPort != port) {
+      console.log(
+        `[ Gganbu ] Server Port ${port} is in use. Now using port ${checkedPort}`
+      )
+    }
+
     // 重写 getServerConfig
     wrappedServerConfig.getConfig = (): ServerConfig => {
       return { ...serverConfig, port: checkedPort }
     }
     // return restart()
-    console.log(wrappedServerConfig, "2272", 91919)
   }
   if (!state.hasWatched) {
     startWatch()
@@ -108,4 +115,14 @@ export const restart = async () => {
   await start()
 
   // return new Promise(() => {})
+}
+
+export const run = async () => {
+  process.on("exit", () => close())
+  // process.on("SIGINT", () => close())
+  if (state.hasStarted) {
+    console.log("server 已启动")
+    return
+  }
+  return start()
 }

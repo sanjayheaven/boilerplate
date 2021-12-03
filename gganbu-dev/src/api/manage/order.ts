@@ -15,7 +15,7 @@ const logger = async (ctx, next) => {
 export const getInfo = async (data, data1?: any) => {
   return {
     data: data,
-    msg: "test1",
+    msg: "11",
   }
 }
 // getInfo.config = { middlewares: [logger] }

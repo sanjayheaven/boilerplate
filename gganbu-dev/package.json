@@ -27,6 +27,7 @@
     "chalk": "^4.1.0",
     "chokidar": "^3.5.2",
     "create-require": "^1.1.1",
+    "detect-port": "^1.3.0",
     "es-module-lexer": "^0.9.3",
     "gganbu": "^1.1.3",
     "jiti": "^1.10.1",

@@ -12,4 +12,5 @@ export default defineConfig({
       { find: "gganbu/request", replacement: "gganbu/dist/request" },
     ],
   },
+  logLevel: "silent",
 })
