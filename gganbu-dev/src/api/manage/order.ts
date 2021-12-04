@@ -1,9 +1,5 @@
 // 订单相关页面
 
-
-// const loadMiddleware = (middlewares, func) => {
-//   await compose([...middlewares, mafunc])
-// }
 const logger = async (ctx, next) => {
   const start = Date.now()
   console.log("日志开始", ctx.request.body)
@@ -18,7 +14,7 @@ export const getInfo = async (data, data1?: any) => {
     msg: "11",
   }
 }
-// getInfo.config = { middlewares: [logger] }
+getInfo.config = { middlewares: [logger] }
 
 export const createOrder = async (name: string) => {
   return {
@@ -26,8 +22,6 @@ export const createOrder = async (name: string) => {
     msg: "测试一样更新",
   }
 }
-// // export const updateOrder = async () => {}
-// // export const deleteOrder = async () => {}
 
 export default () => {
   console.log("export default")

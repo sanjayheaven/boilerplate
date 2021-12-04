@@ -21,6 +21,7 @@ let state = {
   hasStarted: false, // 是否启动过 // 标价区分 第一次和重启的区别
   // 这里重启标记 不能在 restart之后标记，事件循环机制不能及时更新，要在forked on message 之后标记为false。
   hasWatched: false, // 是否开启过监听
+  initPort: "",
 }
 
 let forked
@@ -68,6 +69,7 @@ export const close = async () => {
 export const start = async () => {
   let serverConfig = getServerConfigPre()
   let { port } = serverConfig
+
   let checkedPort
   if (state.hasStarted) {
     console.log("端口已启动")
@@ -81,7 +83,6 @@ export const start = async () => {
         `[ Gganbu ] Server Port ${port} is in use. Now using port ${checkedPort}`
       )
     }
-
     // 重写 getServerConfig
     wrappedServerConfig.getConfig = (): ServerConfig => {
       return { ...serverConfig, port: checkedPort }
@@ -96,7 +97,7 @@ export const start = async () => {
   return new Promise<void>(async (resolve) => {
     Spinner.start()
     forked = fork(childPath, [], {
-      cwd: getProjectRoot(),
+      // cwd: getProjectRoot(),
       env: { MODELPATH, SERVERPORT: checkedPort },
     })
     forked.on("message", (msg: ProcessMessage) => {
