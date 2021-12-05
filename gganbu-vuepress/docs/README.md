@@ -2,7 +2,7 @@
 home: true
 heroImage: /logo.jpg
 actionText: 快速上手 →
-actionLink: /guide/
+actionLink: /intro/
 features:
   - title: 一体化开发
     details: 前后端一体化开发，在 src 一个目录下开发前后端代码

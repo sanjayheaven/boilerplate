@@ -1,7 +1,7 @@
 module.exports = {
   title: "Gganbu",
   description: "Just playing around",
-
+  base: "/gganbu-docs/",
   themeConfig: {
     nav: [
       { text: "首页", link: "/" },

@@ -9,12 +9,16 @@ import GlobalLayout from "D:\\Github\\boilerplate\\gganbu-vuepress\\node_modules
 injectComponentOption(GlobalLayout, 'mixins', rootMixins)
 export const routes = [
   {
-    name: "v-359ea05a",
-    path: "/guide/guide.html",
+    name: "v-2966df8a",
+    path: "/",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-359ea05a").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-2966df8a").then(next)
     },
+  },
+  {
+    path: "/index.html",
+    redirect: "/"
   },
   {
     name: "v-55fa3964",
@@ -29,40 +33,12 @@ export const routes = [
     redirect: "/guide/"
   },
   {
-    name: "v-2966df8a",
-    path: "/",
+    name: "v-359ea05a",
+    path: "/guide/guide.html",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-2966df8a").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-359ea05a").then(next)
     },
-  },
-  {
-    path: "/index.html",
-    redirect: "/"
-  },
-  {
-    name: "v-1e32689e",
-    path: "/middleware/",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-1e32689e").then(next)
-    },
-  },
-  {
-    path: "/middleware/index.html",
-    redirect: "/middleware/"
-  },
-  {
-    name: "v-6de4486e",
-    path: "/intro/",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-6de4486e").then(next)
-    },
-  },
-  {
-    path: "/intro/index.html",
-    redirect: "/intro/"
   },
   {
     name: "v-4277e234",
@@ -77,16 +53,28 @@ export const routes = [
     redirect: "/hooks/"
   },
   {
-    name: "v-5ad5b144",
-    path: "/usage/",
+    name: "v-6de4486e",
+    path: "/intro/",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-5ad5b144").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-6de4486e").then(next)
     },
   },
   {
-    path: "/usage/index.html",
-    redirect: "/usage/"
+    path: "/intro/index.html",
+    redirect: "/intro/"
+  },
+  {
+    name: "v-1e32689e",
+    path: "/middleware/",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-1e32689e").then(next)
+    },
+  },
+  {
+    path: "/middleware/index.html",
+    redirect: "/middleware/"
   },
   {
     name: "v-463961be",
@@ -99,6 +87,18 @@ export const routes = [
   {
     path: "/router/index.html",
     redirect: "/router/"
+  },
+  {
+    name: "v-5ad5b144",
+    path: "/usage/",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-5ad5b144").then(next)
+    },
+  },
+  {
+    path: "/usage/index.html",
+    redirect: "/usage/"
   },
   {
     path: '*',

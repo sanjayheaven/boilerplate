@@ -4,32 +4,16 @@
 export const siteData = {
   "title": "Gganbu",
   "description": "Just playing around",
-  "base": "/",
+  "base": "/gganbu-docs/",
   "headTags": [],
   "pages": [
-    {
-      "title": "1111",
-      "frontmatter": {},
-      "regularPath": "/guide/guide.html",
-      "relativePath": "guide/guide.md",
-      "key": "v-359ea05a",
-      "path": "/guide/guide.html"
-    },
-    {
-      "title": "你好 guide",
-      "frontmatter": {},
-      "regularPath": "/guide/",
-      "relativePath": "guide/README.md",
-      "key": "v-55fa3964",
-      "path": "/guide/"
-    },
     {
       "title": "Home",
       "frontmatter": {
         "home": true,
         "heroImage": "/logo.jpg",
         "actionText": "快速上手 →",
-        "actionLink": "/guide/",
+        "actionLink": "/intro/",
         "features": [
           {
             "title": "一体化开发",
@@ -52,49 +36,20 @@ export const siteData = {
       "path": "/"
     },
     {
-      "title": "中间件",
+      "title": "你好 guide",
       "frontmatter": {},
-      "regularPath": "/middleware/",
-      "relativePath": "middleware/README.md",
-      "key": "v-1e32689e",
-      "path": "/middleware/",
-      "headers": [
-        {
-          "level": 2,
-          "title": "全局中间件",
-          "slug": "全局中间件"
-        },
-        {
-          "level": 2,
-          "title": "文件中间件",
-          "slug": "文件中间件"
-        },
-        {
-          "level": 2,
-          "title": "路由中间件",
-          "slug": "路由中间件"
-        }
-      ]
+      "regularPath": "/guide/",
+      "relativePath": "guide/README.md",
+      "key": "v-55fa3964",
+      "path": "/guide/"
     },
     {
-      "title": "介绍",
+      "title": "1111",
       "frontmatter": {},
-      "regularPath": "/intro/",
-      "relativePath": "intro/README.md",
-      "key": "v-6de4486e",
-      "path": "/intro/",
-      "headers": [
-        {
-          "level": 2,
-          "title": "✨ 特性",
-          "slug": "✨-特性"
-        },
-        {
-          "level": 2,
-          "title": "示例",
-          "slug": "示例"
-        }
-      ]
+      "regularPath": "/guide/guide.html",
+      "relativePath": "guide/guide.md",
+      "key": "v-359ea05a",
+      "path": "/guide/guide.html"
     },
     {
       "title": "Hooks",
@@ -122,6 +77,71 @@ export const siteData = {
       ]
     },
     {
+      "title": "介绍",
+      "frontmatter": {},
+      "regularPath": "/intro/",
+      "relativePath": "intro/README.md",
+      "key": "v-6de4486e",
+      "path": "/intro/",
+      "headers": [
+        {
+          "level": 2,
+          "title": "✨ 特性",
+          "slug": "✨-特性"
+        },
+        {
+          "level": 2,
+          "title": "示例",
+          "slug": "示例"
+        }
+      ]
+    },
+    {
+      "title": "中间件",
+      "frontmatter": {},
+      "regularPath": "/middleware/",
+      "relativePath": "middleware/README.md",
+      "key": "v-1e32689e",
+      "path": "/middleware/",
+      "headers": [
+        {
+          "level": 2,
+          "title": "全局中间件",
+          "slug": "全局中间件"
+        },
+        {
+          "level": 2,
+          "title": "文件中间件",
+          "slug": "文件中间件"
+        },
+        {
+          "level": 2,
+          "title": "路由中间件",
+          "slug": "路由中间件"
+        }
+      ]
+    },
+    {
+      "title": "路由",
+      "frontmatter": {},
+      "regularPath": "/router/",
+      "relativePath": "router/README.md",
+      "key": "v-463961be",
+      "path": "/router/",
+      "headers": [
+        {
+          "level": 2,
+          "title": "默认解析",
+          "slug": "默认解析"
+        },
+        {
+          "level": 2,
+          "title": "路由设置",
+          "slug": "路由设置"
+        }
+      ]
+    },
+    {
       "title": "快速上手",
       "frontmatter": {},
       "regularPath": "/usage/",
@@ -143,26 +163,6 @@ export const siteData = {
           "level": 2,
           "title": "示例",
           "slug": "示例"
-        }
-      ]
-    },
-    {
-      "title": "路由",
-      "frontmatter": {},
-      "regularPath": "/router/",
-      "relativePath": "router/README.md",
-      "key": "v-463961be",
-      "path": "/router/",
-      "headers": [
-        {
-          "level": 2,
-          "title": "默认解析",
-          "slug": "默认解析"
-        },
-        {
-          "level": 2,
-          "title": "路由设置",
-          "slug": "路由设置"
         }
       ]
     }
