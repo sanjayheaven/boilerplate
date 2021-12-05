@@ -1,0 +1,16 @@
+{
+  "name": "gganbu-vuepress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "vuepress": "^1.8.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "vuepress dev docs --temp .temp",
+    "build": "vuepress build docs"
+  },
+  "author": "",
+  "license": "ISC"
+}
