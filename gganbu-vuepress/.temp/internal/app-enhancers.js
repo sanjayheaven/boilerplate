@@ -1,6 +1,6 @@
 import m0 from "D:\\Github\\boilerplate\\gganbu-vuepress\\.temp\\app-enhancers\\0.js"
 import m1 from "D:\\Github\\boilerplate\\gganbu-vuepress\\.temp\\app-enhancers\\data-block.js"
-import m2 from "D:\\Github\\boilerplate\\gganbu-vuepress\\.temp\\app-enhancers\\global-components-56.js"
+import m2 from "D:\\Github\\boilerplate\\gganbu-vuepress\\.temp\\app-enhancers\\global-components-59.js"
 import m3 from "D:\\Github\\boilerplate\\gganbu-vuepress\\.temp\\app-enhancers\\1.js"
 
 export default [

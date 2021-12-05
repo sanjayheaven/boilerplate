@@ -9,6 +9,14 @@ import GlobalLayout from "D:\\Github\\boilerplate\\gganbu-vuepress\\node_modules
 injectComponentOption(GlobalLayout, 'mixins', rootMixins)
 export const routes = [
   {
+    name: "v-359ea05a",
+    path: "/guide/guide.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-359ea05a").then(next)
+    },
+  },
+  {
     name: "v-55fa3964",
     path: "/guide/",
     component: GlobalLayout,
@@ -21,14 +29,6 @@ export const routes = [
     redirect: "/guide/"
   },
   {
-    name: "v-359ea05a",
-    path: "/guide/guide.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-359ea05a").then(next)
-    },
-  },
-  {
     name: "v-2966df8a",
     path: "/",
     component: GlobalLayout,
@@ -39,6 +39,18 @@ export const routes = [
   {
     path: "/index.html",
     redirect: "/"
+  },
+  {
+    name: "v-1e32689e",
+    path: "/middleware/",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-1e32689e").then(next)
+    },
+  },
+  {
+    path: "/middleware/index.html",
+    redirect: "/middleware/"
   },
   {
     name: "v-6de4486e",
@@ -65,16 +77,16 @@ export const routes = [
     redirect: "/hooks/"
   },
   {
-    name: "v-1e32689e",
-    path: "/middleware/",
+    name: "v-5ad5b144",
+    path: "/usage/",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-1e32689e").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-5ad5b144").then(next)
     },
   },
   {
-    path: "/middleware/index.html",
-    redirect: "/middleware/"
+    path: "/usage/index.html",
+    redirect: "/usage/"
   },
   {
     name: "v-463961be",
@@ -87,18 +99,6 @@ export const routes = [
   {
     path: "/router/index.html",
     redirect: "/router/"
-  },
-  {
-    name: "v-5ad5b144",
-    path: "/usage/",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-5ad5b144").then(next)
-    },
-  },
-  {
-    path: "/usage/index.html",
-    redirect: "/usage/"
   },
   {
     path: '*',
