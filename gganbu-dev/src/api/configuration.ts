@@ -1,4 +1,4 @@
-import { defineServerConfig } from "gganbu/dist/config"
+import { defineServerConfig } from "gganbu"
 import middlewares from "../middlewares"
 
 export default defineServerConfig({

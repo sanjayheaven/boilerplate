@@ -1,5 +1,9 @@
 // 订单相关页面
 
+export const config = {
+  
+}
+
 const logger = async (ctx, next) => {
   const start = Date.now()
   console.log("日志开始", ctx.request.body)
@@ -11,7 +15,7 @@ const logger = async (ctx, next) => {
 export const getInfo = async (data, data1?: any) => {
   return {
     data: data,
-    msg: "11",
+    msg: "111",
   }
 }
 getInfo.config = { middlewares: [logger] }

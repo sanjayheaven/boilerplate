@@ -1,16 +1,19 @@
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
-// import model from "gganbu/dist/vite-plugin-model"
-import model from "./Gganbu/src/vite-plugin-model"
+import { VitePlugin } from "gganbu"
+// import { VitePlugin } from "./Gganbu/src/"
 
 export default defineConfig({
-  plugins: [vue(), model()],
+  plugins: [vue(), VitePlugin()],
   resolve: {
     alias: [
       { find: "@", replacement: require("path").resolve(__dirname, "src") },
       { find: "~", replacement: require("path").resolve(__dirname) },
-      { find: "gganbu/request", replacement: "gganbu/dist/request" },
+      // {
+      //   find: "gganbu/request",
+      //   replacement: require("path").resolve(__dirname, "./Gganbu/src/request"),
+      // },
     ],
   },
-  logLevel: "silent",
+  // logLevel: "silent",
 })

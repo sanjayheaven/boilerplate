@@ -1,24 +1,30 @@
-<script setup lang="ts">
+<template>
+  <div>
+    Vue3.x项目初始化
+    <div>获取的数据</div>
+    <div>{{ data }}</div>
+  </div>
+</template>
+<script lang="ts">
 import { onMounted } from "vue"
 import { getInfo, createOrder } from "../api/manage/order"
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-onMounted(async () => {
-  try {
-    let res = await getInfo({ orders: 1, products: 1 }, { hello: "world" })
-    let res1 = await getInfo("orders")
-    let res2 = await createOrder("创建订单1")
-    console.log(res, res1, res2, 111)
-  } catch (err) {
-    console.log(err)
-  }
-})
+export default {
+  mounted() {
+    this.getInfoFromServer()
+  },
+  data() {
+    return {
+      data: "",
+    }
+  },
+  methods: {
+    async getInfoFromServer() {
+      let res = await getInfo({ products: 1 })
+      this.data = res
+    },
+  },
+}
 </script>
-
-<template>
-  <div>Vue3.x项目初始化</div>
-</template>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
