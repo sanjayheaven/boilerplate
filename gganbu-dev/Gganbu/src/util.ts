@@ -80,7 +80,12 @@ export const proxyController = (
   }
 }
 
-
+/**
+ * 根据 package.json 找到项目根目录
+ */
+export const getProjectRoot = (cwd?: string) => {
+  return sync(cwd) || process.cwd()
+}
 
 /**
  * 动态require文件 包含所有的了 文件只能读取一次 所以需要加一个缓存了

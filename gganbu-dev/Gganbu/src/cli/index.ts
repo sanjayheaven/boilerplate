@@ -1,18 +1,14 @@
 import * as chokidar from "chokidar"
 import { join, relative, resolve } from "upath"
-import {
-  getResolvedSrcDir,
-  getServerConfigPre,
-  wrappedServerConfig,
-} from "../config"
+import { getResolvedSrcDir, } from "../config"
 import { getProjectRoot } from "../util"
 import { fork } from "child_process"
 import { statSync, existsSync } from "fs"
 import Spin from "light-spinner"
 import { ProcessMessage } from "../types/cli"
 import { checkPort } from "./util"
-import { getServerConfig } from "../config"
-import { ServerConfig } from "../types/config"
+import { ProjectConfig, } from "../types/config"
+import { getProjectConfig, wrappedProjectConfig } from ".."
 const Spinner = new Spin({ text: "Gganbu Starting" })
 
 // 状态库
@@ -21,7 +17,6 @@ let state = {
   hasStarted: false, // 是否启动过 // 标价区分 第一次和重启的区别
   // 这里重启标记 不能在 restart之后标记，事件循环机制不能及时更新，要在forked on message 之后标记为false。
   hasWatched: false, // 是否开启过监听
-  initPort: "",
 }
 
 let forked
@@ -67,14 +62,9 @@ export const close = async () => {
 }
 
 export const start = async () => {
-  let serverConfig = getServerConfigPre()
-  let { port } = serverConfig
-
+  let projectConfig = getProjectConfig()
+  let { port } = projectConfig
   let checkedPort
-  if (state.hasStarted) {
-    console.log("端口已启动")
-    return
-  }
   if (!state.hasStarted) {
     // 第一次启动 需要检测端口
     checkedPort = await checkPort(port)
@@ -83,11 +73,10 @@ export const start = async () => {
         `[ Gganbu ] Server Port ${port} is in use. Now using port ${checkedPort}`
       )
     }
-    // 重写 getServerConfig
-    wrappedServerConfig.getConfig = (): ServerConfig => {
-      return { ...serverConfig, port: checkedPort }
+    // 重写 
+    wrappedProjectConfig.getConfig = (): ProjectConfig => {
+      return { ...projectConfig, port: checkedPort }
     }
-    // return restart()
   }
   if (!state.hasWatched) {
     startWatch()
@@ -97,12 +86,12 @@ export const start = async () => {
   return new Promise<void>(async (resolve) => {
     Spinner.start()
     forked = fork(childPath, [], {
-      // cwd: getProjectRoot(),
+      cwd: getProjectRoot(),
       env: { MODELPATH, SERVERPORT: checkedPort },
     })
     forked.on("message", (msg: ProcessMessage) => {
       if (msg.type == "started") {
-        state.hasStarted = true // 启动过一次 第一次
+        state.hasStarted = true
         Spinner.stop()
         state.restarting = false
       }
@@ -114,8 +103,6 @@ export const start = async () => {
 export const restart = async () => {
   await close()
   await start()
-
-  // return new Promise(() => {})
 }
 
 export const run = async () => {
