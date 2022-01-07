@@ -1,0 +1,20 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --watch ./**/*.ts --exec \"ts-node\" index.ts "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa-router": "^10.1.1",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/koa-router": "^7.4.4"
+  }
+}
