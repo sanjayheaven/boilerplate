@@ -5,16 +5,26 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch ./**/*.ts --exec \"ts-node\" index.ts "
+    "start": "nodemon --watch ./services/**/*.ts --exec \"ts-node\" app.ts "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jiti": "^1.12.9",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
+    "koa2-cors": "^2.0.6",
     "nodemon": "^2.0.15",
-    "typescript": "^4.5.4"
+    "pkg-dir": "^5.0.0",
+    "pluralize": "^8.0.0",
+    "typescript": "^4.5.4",
+    "upath": "^2.0.1"
   },
   "devDependencies": {
-    "@types/koa-router": "^7.4.4"
+    "@types/koa-bodyparser": "^4.3.5",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa2-cors": "^2.0.2",
+    "@types/pluralize": "^0.0.29"
   }
 }
