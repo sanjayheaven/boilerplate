@@ -1,13 +1,12 @@
-import { resolve } from "upath"
-import { getResolvedServiceDir } from "./config"
+import { IApp } from "./types/app"
 import { Plugin } from "./types/plugin"
 
 const plugins: Plugin[] = []
-export default {
-  load(plugin: Plugin) {
+
+export const App: IApp = {
+  load(plugin) {
     plugins.push(plugin)
-    console.log(plugins, 1111)
-    return this
+    return App
   },
   async run() {
     for (let plugin of plugins) {

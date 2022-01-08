@@ -1,16 +1,17 @@
 import Koa from "Koa"
 import KoaCompose from "koa-compose"
 import GlobalMiddlewares from "./middlewares"
-import { getServices } from "../../services"
 import { isFn } from "../../util"
 import KoaRouter from "koa-router"
 import { ServiceAction } from "../../types/service"
 import { Context } from "koa"
-import { Controller, ControllerAction, Route, ServerConfig } from "./type"
+import { Controller, ControllerAction, FrameworkConfig, Route } from "./type"
 import { join } from "upath"
+import { getServices } from "../../services"
+import { FrameworkPlugin } from "../../types/plugin"
 
-const defaultConfig: ServerConfig = {
-  routerPrefix: "/api/v1",
+const defaultConfig: FrameworkConfig = {
+  routerPrefix: "/api",
   port: 3000,
 }
 
@@ -62,7 +63,7 @@ const getRoutes = () => {
   }, [])
 }
 
-const getRouters = (config?: ServerConfig): KoaRouter.IMiddleware[] => {
+const getRouters = (config?: FrameworkConfig): KoaRouter.IMiddleware[] => {
   let { routerPrefix } = config || defaultConfig
   let routes = getRoutes()
   return routes.reduce((acc: KoaRouter.IMiddleware[], route: Route) => {
@@ -80,9 +81,9 @@ const getRouters = (config?: ServerConfig): KoaRouter.IMiddleware[] => {
   }, [])
 }
 
-const start = async (config?: ServerConfig) => {
+const start = async (config?: FrameworkConfig) => {
   const App = new Koa()
-  let { port,  middlewares = [] } = config || defaultConfig
+  let { port, middlewares = [] } = config || defaultConfig
   // load router
   const routers = getRouters(config || defaultConfig)
   // load middlewares,
@@ -102,6 +103,15 @@ const start = async (config?: ServerConfig) => {
   })
 }
 
-export default {
-  start,
+let configuration: FrameworkConfig = defaultConfig
+export const Framework: FrameworkPlugin = {
+  async start() {
+    return start(configuration)
+  },
+  setConfig(config: FrameworkConfig) {
+    configuration = config
+    return this
+  },
 }
+
+export { FrameworkConfig } from "./type"

@@ -21,9 +21,9 @@ export interface ControllerAction {
 }
 
 /**
- * config params
+ * framework config
  */
-export interface ServerConfig {
+export interface FrameworkConfig {
   port: Number
   routerPrefix?: String
   middlewares?: []

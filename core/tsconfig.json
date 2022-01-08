@@ -17,6 +17,7 @@
     "emitDecoratorMetadata": true,
     "types": ["Node"],
     "baseUrl": "."
+    // "declaration": false
   },
   // "include": ["./src"],
   "ts-node": {

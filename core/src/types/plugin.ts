@@ -1,11 +1,9 @@
 export interface Plugin {
-  start: (config?: any) => Promise<void>
-  setConfig?: () => object
+  start(config?: any): Promise<any>
+  setConfig?(args: any): Promise<any>
 }
 
 export interface DBPlugin extends Plugin {
-  dbActions: [() => any]
-  models: []
-  schemas: any
+  actions?: [(args: object) => any]
 }
 export interface FrameworkPlugin extends Plugin {}

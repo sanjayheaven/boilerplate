@@ -1,19 +1,6 @@
 import { resolve } from "upath"
 import { ProjectConfig } from "./types/config"
-import { existFile, getProjectRoot, importFileDefault } from "./util"
-
-/**
- * 默认项目配置
- */
-
-export const getProjectConfig = (): ProjectConfig => {
-  const root = getProjectRoot()
-  let jsFile = resolve(root, "ns.config.js")
-  let tsFile = resolve(root, "ns.config.ts")
-  let filePath = (existFile(jsFile) && jsFile) || (existFile(tsFile) && tsFile)
-  if (!filePath) return {}
-  return importFileDefault(filePath)
-}
+import { getProjectRoot } from "./util"
 
 /**
  * 根据项目配置，找到services服务所在目录地址
