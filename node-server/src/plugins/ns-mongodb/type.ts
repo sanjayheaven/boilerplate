@@ -5,3 +5,4 @@ export interface DBConfig {
   address: string
   options?: object
 }
+

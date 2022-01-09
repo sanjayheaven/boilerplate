@@ -16,7 +16,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "types": ["Node"],
-    "baseUrl": "."
+    // "baseUrl": "."
     // "declaration": false
   },
   // "include": ["./src"],

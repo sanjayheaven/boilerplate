@@ -21,7 +21,7 @@ export const listServiceFiles = (currentDirPath): Service[] => {
     let stat = fs.statSync(filePath)
     if (stat.isDirectory()) {
       let indexFile = path.resolve(filePath, "index.ts")
-      acc.push({ filePath: indexFile, fileName: "index.ts" })
+      acc.push({ filePath: indexFile, fileName: file })
     } else {
       if (!isTsOrJsFile(file)) return acc
       let indexFile = path.resolve(filePath)
@@ -58,4 +58,12 @@ export const importFileDefault = (filePath: string) => {
  */
 export const existFile = (filePath: string) => {
   return existsSync(filePath)
+}
+
+/**
+ * 首字母大写
+ */
+export const firstAlphaToUpperCase = (str: string) => {
+  let [first, ...rest] = str
+  return first.toUpperCase() + rest.join("")
 }
