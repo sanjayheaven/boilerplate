@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch ./services/**/*.ts --exec \"ts-node\" app.ts "
+    "start": "nodemon --watch ./services/**/*.ts --exec \"ts-node\" ./app.ts "
   },
   "author": "",
   "license": "ISC",

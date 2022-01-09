@@ -4,7 +4,7 @@ const {
   Types: { Long },
 } = mongoose
 
-export default {
+const foodSchema = mongoose.schema({
   sequence: Number,
   categoryId: {
     type: mongoose.SchemaTypes.ObjectId, //角色
@@ -49,6 +49,6 @@ export default {
       ],
     },
   ],
-}
+})
 
-module.exports = mongoose.model("Food", foodSchema)
+export const model = mongoose.model("Category", foodSchema)
