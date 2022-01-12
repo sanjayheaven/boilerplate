@@ -8,7 +8,7 @@ export const getServices = (): Service[] => {
   let resolvedServiceDir = getResolvedServiceDir()
   let files = listServiceFiles(resolvedServiceDir)
   return files.map((file) => {
+    // need filter the service that is async fn 
     return { ...file, exports: importFile(file.filePath) }
   })
 }
-
