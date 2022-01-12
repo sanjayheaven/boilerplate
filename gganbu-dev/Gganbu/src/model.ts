@@ -13,12 +13,7 @@ import {
   proxyController,
 } from "./util"
 import { join } from "upath"
-import {
-  getProjectConfig,
-  getResolvedControllerDir,
-  getServerConfig,
-  wrappedServerConfig,
-} from "./config"
+import { getProjectConfig, getResolvedControllerDir } from "./config"
 import { Route, Controller } from "./types/model"
 import { getGlobalMiddlewares, wrapController } from "./middleware"
 import { als } from "./hook"
@@ -106,12 +101,10 @@ export const AppStart = async ({ port }) => {
       await next()
     })
   })
-
+  
   // 加载全局中间件
   let middlewares = getGlobalMiddlewares()
-
   App.use(KoaCompose([...middlewares, ...routers]))
-
   // 启动
   if (!server) {
     server = App.listen(port, () => {})

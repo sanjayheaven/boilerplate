@@ -1,8 +1,6 @@
 // 订单相关页面
 
-export const config = {
-  
-}
+export const config = {}
 
 const logger = async (ctx, next) => {
   const start = Date.now()

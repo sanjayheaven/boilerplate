@@ -1,10 +1,7 @@
-// import { defineConfig } from "./Gganbu/src/config"
-import { defineConfig } from "gganbu"
-import middlewares from "./src/middlewares"
+import { defineConfig } from "./Gganbu/src/config"
 export default defineConfig({
   controllerDir: "./src/api",
-  routerPrefix: "/api",
-  build: {},
-  middlewares,
-  // request:
+  routerPrefix: "/api/v1",
+  baseURL: "http://127.0.0.1:3333",
+  port: 3333,
 })
