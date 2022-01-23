@@ -4,10 +4,12 @@ import pluralize from "pluralize"
 export const createBasicActions = (model: typeof Model) => {
   let name = model.modelName
   let namePluralize = pluralize(name.toLowerCase())
-  console.log(name, "看看创建action的名字")
   let schema = model.schema
   let create = `create${model.modelName}`
   let res = {
+    [create]: async (data: object) => {
+      return model.create(data)
+    },
     create: async (data: object) => {
       return model.create(data)
     },
@@ -36,6 +38,5 @@ export const createBasicActions = (model: typeof Model) => {
       return model.findById({ _id })
     },
   }
-  console.log(res)
   return res
 }

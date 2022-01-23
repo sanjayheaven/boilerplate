@@ -1,6 +1,9 @@
 import { Context } from "koa"
 import { ServiceAction } from "../../types/service"
 // extends type Service
+
+export { Context } from "koa"
+
 export interface Controller {
   serviceFilePath: string
   serviceFileName: string

@@ -7,3 +7,5 @@ export interface DBPlugin extends Plugin {
   actions?: [(args: object) => any]
 }
 export interface FrameworkPlugin extends Plugin {}
+
+export interface CachePlugin extends Plugin {}

@@ -1,13 +1,18 @@
 import Koa from "Koa"
-import KoaCompose from "koa-compose"
-import GlobalMiddlewares from "./middlewares"
-import { isFn } from "../../util"
 import KoaRouter from "koa-router"
+import KoaCompose from "koa-compose"
+import GlobalDefaultMiddlewares from "./middlewares"
+import { isFn } from "../../util"
 import { ServiceAction } from "../../types/service"
-import { Context } from "koa"
-import { Controller, ControllerAction, FrameworkConfig, Route } from "./type"
-import { join } from "upath"
+import {
+  Context,
+  Controller,
+  ControllerAction,
+  FrameworkConfig,
+  Route,
+} from "./type"
 import { getServices } from "../../services"
+import { join } from "upath"
 import { FrameworkPlugin } from "../../types/plugin"
 import pluralize from "pluralize"
 
@@ -67,13 +72,12 @@ const getRoutes = () => {
 const getRouters = (config?: FrameworkConfig): KoaRouter.IMiddleware[] => {
   let { routerPrefix } = { ...defaultConfig, ...(config || {}) }
   let routes = getRoutes()
-  console.log(routes, 119919)
   return routes.reduce((acc: KoaRouter.IMiddleware[], route: Route) => {
     let { controllerAction, serviceFileName, method, serviceAction } = route
     let router = new KoaRouter({
       prefix: join(routerPrefix, pluralize(serviceFileName)),
     })
-    let routeMiddlewares = serviceAction.config?.middlewares
+    let routeMiddlewares = serviceAction?.config?.middlewares || []
     if (method == "GET") {
       router.get(route.path, ...routeMiddlewares, controllerAction)
     } else {
@@ -91,7 +95,7 @@ const start = async (config?: FrameworkConfig) => {
   // load router
   const routers = getRouters(config || defaultConfig)
   // load middlewares,
-  App.use(KoaCompose([...middlewares, ...GlobalMiddlewares, ...routers]))
+  App.use(KoaCompose([...middlewares, ...GlobalDefaultMiddlewares, ...routers]))
   //   start
   let server = App.listen(port, () => {
     console.log(

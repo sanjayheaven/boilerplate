@@ -1,8 +1,4 @@
-import mongoose, {
-  Schema,
-  SchemaDefinition,
-  SchemaDefinitionProperty,
-} from "mongoose"
+import mongoose, { Schema, SchemaDefinitionProperty } from "mongoose"
 import path from "path"
 import { firstAlphaToUpperCase } from "../../util"
 

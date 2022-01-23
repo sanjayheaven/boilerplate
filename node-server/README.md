@@ -7,7 +7,12 @@
 ## 原则
 
 - service 服务作用：**业务逻辑处理** **和数据组装**
-- DAO 只允许自己的 Service 访问，其他 Service 要访问必须通过对应的 Service。
+- **DAO 只允许自己的 Service 访问**，其他 Service 要访问必须通过对应的 Service。
+- 各领域模型不传递
+- 一个 Service 对应 一个或者多个 DAO 待定，是否应该一个对一个
+- 一个 Service 可以互相调用。可以采用消息队列来做？
+
+-
 
 ## 随笔
 
@@ -47,4 +52,3 @@
 
 - https://cloud.tencent.com/developer/article/1496900
 - [前后端分离之 NodeJS+mysql 分层之美](https://www.jianshu.com/p/dab01487a9df)
-
