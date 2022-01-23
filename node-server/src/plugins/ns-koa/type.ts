@@ -1,5 +1,5 @@
 import { Context } from "koa"
-
+import { ServiceAction } from "../../types/service"
 // extends type Service
 export interface Controller {
   serviceFilePath: string
@@ -13,6 +13,7 @@ export interface Route {
   actionName: string
   serviceFilePath: string
   serviceFileName: string
+  serviceAction: ServiceAction
   controllerAction: ControllerAction
 }
 

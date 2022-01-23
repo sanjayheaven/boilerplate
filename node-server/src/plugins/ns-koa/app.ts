@@ -37,7 +37,7 @@ const getControllers = (): Controller[] => {
             ctx.body = res
           }
         }
-        return { ...acc, [key]: controllerAction }
+        return { ...acc, [key]: controllerAction, serviceAction }
       }, {}),
     }
   })
@@ -69,14 +69,15 @@ const getRouters = (config?: FrameworkConfig): KoaRouter.IMiddleware[] => {
   let routes = getRoutes()
   console.log(routes, 119919)
   return routes.reduce((acc: KoaRouter.IMiddleware[], route: Route) => {
-    let { controllerAction, serviceFileName, method } = route
+    let { controllerAction, serviceFileName, method, serviceAction } = route
     let router = new KoaRouter({
       prefix: join(routerPrefix, pluralize(serviceFileName)),
     })
+    let routeMiddlewares = serviceAction.config?.middlewares
     if (method == "GET") {
-      router.get(route.path, controllerAction)
+      router.get(route.path, ...routeMiddlewares, controllerAction)
     } else {
-      router.post(route.path, controllerAction)
+      router.post(route.path, ...routeMiddlewares, controllerAction)
     }
     acc.push(router.routes())
     acc.push(router.allowedMethods())
