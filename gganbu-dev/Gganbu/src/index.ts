@@ -1,3 +1,4 @@
-export { default as VitePlugin } from "./vite-plugin-model"
+export { default as VitePlugin } from "./api/vite-plugin-model"
 export * from "./config"
-export { request } from "./request"
+// export * from "./request" // 谨慎导出
+

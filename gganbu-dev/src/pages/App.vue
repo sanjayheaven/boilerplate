@@ -3,6 +3,7 @@
     Vue3.x项目初始化
     <div>获取的数据</div>
     <div>{{ data }}</div>
+    <input multiple type="file" @change="handleOnChange" />
   </div>
 </template>
 <script lang="ts">
@@ -18,6 +19,9 @@ export default {
     }
   },
   methods: {
+    async handleOnChange(e) {
+      console.log(e.target.files)
+    },
     async getInfoFromServer() {
       let res = await getInfo({ products: 1 })
       this.data = res

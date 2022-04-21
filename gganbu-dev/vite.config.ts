@@ -1,7 +1,6 @@
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
-// import { VitePlugin } from "gganbu"
-import { VitePlugin } from "./Gganbu/src/"
+import { VitePlugin } from "./Gganbu/src"
 
 export default defineConfig({
   plugins: [vue(), VitePlugin()],

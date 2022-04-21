@@ -9,14 +9,15 @@
  */
 const createJiti = require("jiti")
 let jiti = createJiti(process.cwd(), { cache: false })
-const MODELPATH = process.env.MODELPATH // 新建子进程的时候 创建的。
-const SERVERPORT = process.env.SERVERPORT
-const { AppStart } = jiti(MODELPATH)
+
+const APPPATH = process.env.APPPATH
+const { AppStart } = jiti(APPPATH)
 
 ;(async () => {
   let startSuccess = false
   try {
-    await AppStart({ port: SERVERPORT })
+    // 出现问题，端口不匹配
+    await AppStart()
     startSuccess = true
   } catch (e) {
     console.log(e, 122333)

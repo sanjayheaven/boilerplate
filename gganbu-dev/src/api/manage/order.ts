@@ -1,5 +1,7 @@
 // 订单相关页面
 
+import { ServiceAction } from "Gganbu/src/types/service"
+
 export const config = {}
 
 const logger = async (ctx, next) => {
@@ -10,10 +12,10 @@ const logger = async (ctx, next) => {
   console.log(`request ${ctx.url} cost ${cost}ms`)
 }
 
-export const getInfo = async (data, data1?: any) => {
+export const getInfo: ServiceAction = async (data, data1?: any) => {
   return {
     data: data,
-    msg: "111",
+    msg: "1266",
   }
 }
 getInfo.config = { middlewares: [logger] }

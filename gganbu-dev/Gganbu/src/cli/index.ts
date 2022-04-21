@@ -1,14 +1,15 @@
 import * as chokidar from "chokidar"
 import { join, relative, resolve } from "upath"
-import { getResolvedSrcDir } from "../config"
-import { getProjectRoot } from "../util"
+import { getResolvedSrcDir } from "../config/index"
+import { getProjectRoot } from "../utils"
 import { fork } from "child_process"
 import { statSync, existsSync } from "fs"
 import Spin from "light-spinner"
 import { ProcessMessage } from "../types/cli"
 import { checkPort } from "./util"
 import { ProjectConfig } from "../types/config"
-import { getProjectConfig, wrappedProjectConfig } from ".."
+import { getProjectConfig, wrappedProjectConfig } from "../config"
+
 const Spinner = new Spin({ text: "Gganbu Starting" })
 
 // 状态库
@@ -27,7 +28,7 @@ export const startWatch = () => {
   const watchAllowExts = [].concat(".ts")
 
   const watcher = chokidar.watch(resolvedSrcDir, {
-    ignored: (path, fsStats) => {
+    ignored: (path) => {
       if (path.includes("node_modules")) {
         return true
       }
@@ -53,6 +54,9 @@ export const startWatch = () => {
   })
 }
 
+/**
+ * 关闭应用，关闭进程
+ */
 export const close = async () => {
   Spinner.stop()
   if (forked?.kill) {
@@ -87,12 +91,12 @@ export const start = async () => {
     startWatch()
   }
   let childPath = join(__dirname, "./childModule")
-  let MODELPATH = resolve(__dirname, "../model")
+  let APPPATH = resolve(__dirname, "../app/index")
   return new Promise<void>(async (resolve) => {
     Spinner.start()
     forked = fork(childPath, [], {
       cwd: getProjectRoot(),
-      env: { MODELPATH, SERVERPORT: checkedPort },
+      env: { APPPATH, SERVERPORT: checkedPort },
     })
     forked.on("message", (msg: ProcessMessage) => {
       if (msg.type == "started") {

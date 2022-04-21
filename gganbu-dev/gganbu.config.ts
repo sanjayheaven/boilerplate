@@ -1,11 +1,17 @@
-import { defineConfig } from "./Gganbu/src/config"
+import { defineConfig } from "./Gganbu/src/config/index"
+import { Framework, FrameworkConfig } from "./Gganbu/src/framework/koa"
+
+Framework.setConfig({ port: 9527, middlewares: [] } as FrameworkConfig)
+
 export default defineConfig({
   controllerDir: "./src/api",
-  routerPrefix: "/api/v1",
-  baseURL: "http://127.0.0.1:3333",
-  port: 3333,
+  serviceDir: "./src/api",
+  routerPrefix: "/api",
+  // baseURL: "http://127.0.0.1:9527",
+  port: 9527,
+  plugins: [Framework],
 })
 
 /**
- * 
+ *
  */

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/sanjayheaven/server#readme",
   "dependencies": {
+    "@koa/multer": "^3.0.0",
     "@vitejs/plugin-vue": "^1.9.4",
     "@vue/compiler-sfc": "^3.2.21",
     "axios": "^0.24.0",

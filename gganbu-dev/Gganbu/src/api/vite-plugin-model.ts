@@ -1,9 +1,8 @@
-import { createApiSDK } from "./api"
-import { run } from "./cli"
-import { isApiFile } from "./util"
+import { createApiSDK } from "./index"
+import { start } from "../cli"
+import { isApiFile } from "../utils"
 
 export default function () {
-  let server
   return {
     name: "Gganbu/vite-plugin-model", // 必须的，将会在 warning 和 error 中显示
     async transform(code, file) {
@@ -12,11 +11,9 @@ export default function () {
       let api = await createApiSDK(code, file)
       return { code: api }
     },
-    async configureServer(_server) {
-      if (!server) {
-        await run()
-      }
-      _server.middlewares.use(async (req, res, next) => {
+    async configureServer(server) {
+      await start()
+      server.middlewares.use(async (req, res, next) => {
         next()
       })
     },
