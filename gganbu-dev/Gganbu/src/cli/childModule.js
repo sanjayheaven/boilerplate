@@ -20,7 +20,7 @@ const { AppStart } = jiti(APPPATH)
     await AppStart()
     startSuccess = true
   } catch (e) {
-    console.log(e, 122333)
+    console.log(e, 122333, APPPATH)
     process.send({
       type: "error",
       message: "start error: " + ((e && e.message) || ""),

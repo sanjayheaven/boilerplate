@@ -33,3 +33,5 @@ export const getGlobalMiddlewares = () => {
   let { middlewares = [] } = getProjectConfig()
   return [...middlewares, bodyParser(), cors()]
 }
+
+

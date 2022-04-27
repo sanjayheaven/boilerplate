@@ -10,7 +10,7 @@ export interface Service {
  * service actions, only accept an Object type arg
  */
 export interface ServiceAction {
-  (arg?: any): any
+  (arg?: object): any
   config?: {
     middlewares?: any[] // 判断是否有中间件，有就先组合
   }

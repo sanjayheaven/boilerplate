@@ -5,9 +5,9 @@ import { getProjectRoot } from "../utils"
 import { fork } from "child_process"
 import { statSync, existsSync } from "fs"
 import Spin from "light-spinner"
-import { ProcessMessage } from "../types/cli"
 import { checkPort } from "./util"
-import { ProjectConfig } from "../types/config"
+import { ProcessMessage } from "./type"
+import { ProjectConfig } from "../config/type"
 import { getProjectConfig, wrappedProjectConfig } from "../config"
 
 const Spinner = new Spin({ text: "Gganbu Starting" })
@@ -28,7 +28,7 @@ export const startWatch = () => {
   const watchAllowExts = [].concat(".ts")
 
   const watcher = chokidar.watch(resolvedSrcDir, {
-    ignored: (path) => {
+    ignored: (path, fsStats) => {
       if (path.includes("node_modules")) {
         return true
       }
@@ -69,8 +69,6 @@ export const close = async () => {
 export const start = async () => {
   let projectConfig = getProjectConfig()
   let { port } = projectConfig
-
-  console.log(projectConfig, 1234)
   // 先解决，重复利用端口，不然端口一直上升，最后看下为什么不能等待关闭，一直是一个端口
   state.initPort = (!state.initPort && port) || state.initPort
   let checkedPort

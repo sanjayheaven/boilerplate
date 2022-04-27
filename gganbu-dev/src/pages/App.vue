@@ -9,6 +9,7 @@
 <script lang="ts">
 import { onMounted } from "vue"
 import { getInfo, createOrder } from "../api/manage/order"
+import { uploadApi } from "../api/upload"
 export default {
   mounted() {
     this.getInfoFromServer()
@@ -21,6 +22,10 @@ export default {
   methods: {
     async handleOnChange(e) {
       console.log(e.target.files)
+      let files = e.target.files
+      let formData = new FormData()
+      formData.append("files", files)
+      await uploadApi({ hello: formData })
     },
     async getInfoFromServer() {
       let res = await getInfo({ products: 1 })

@@ -1,6 +1,6 @@
-import { listFiles, importFile } from "../utils"
+import { importFile, listFiles } from "../utils"
 import { getResolvedServiceDir } from "../config"
-import { Service } from "../types/service"
+import { Service } from "./type"
 
 /**
  * 获取服务，面向服务，单个函数代表一个服务

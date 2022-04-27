@@ -1,6 +1,8 @@
 import { ServiceAction } from "Gganbu/src/types/service"
+import UploadMiddleware from "../../../Gganbu/src/upload"
 
-export const uploadImage: ServiceAction = async ({ images }) => {
-  return {}
+export const uploadApi: ServiceAction = async (post) => {
+  console.log(post)
+  return post
 }
-uploadImage.config = { middlewares: [] }
+uploadApi.config = { middlewares: [UploadMiddleware()] }
