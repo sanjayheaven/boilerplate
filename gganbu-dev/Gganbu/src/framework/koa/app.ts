@@ -7,6 +7,7 @@ import { Service, ServiceAction } from "../../service/type"
 import { Context, FrameworkConfig, Route } from "./type"
 import { getServices } from "../../service"
 import { FrameworkPlugin } from "../../plugins/type"
+import { als, useContext } from "../../hook"
 
 const defaultConfig: FrameworkConfig = {
   port: 3000,
@@ -26,6 +27,8 @@ const getRoutes = () => {
         let serviceAction: ServiceAction = exports[key]
         let controllerAction = async (ctx: Context) => {
           let params = method == "GET" ? ctx.request.query : ctx.request.body
+          // 这里的ctx.request.body 只解决了一体化中前端发起的请求，没有解决postman中的请求，对象不可迭代
+          console.log(ctx.request.body, 1111222, ctx.request.files)
           ctx.body = await serviceAction(params)
         }
         return { path, method, routerPrefix, serviceAction, controllerAction }
@@ -36,7 +39,6 @@ const getRoutes = () => {
 
 const getRouters = (): KoaRouter.IMiddleware[] => {
   let routes = getRoutes()
-  console.log(routes, 191929)
   let res = routes.reduce((acc: KoaRouter.IMiddleware[], route: Route) => {
     let { controllerAction, routerPrefix, method, serviceAction } = route
     let router = new KoaRouter({ prefix: routerPrefix })
@@ -56,9 +58,16 @@ const getRouters = (): KoaRouter.IMiddleware[] => {
 const start = async (config?: FrameworkConfig) => {
   const App = new Koa()
   let { port, middlewares = [] } = config || defaultConfig
+
+  // load als
+  App.use(async (ctx: Context, next: any) => {
+    await als.run({ ctx: ctx }, async () => {
+      let ctx = useContext()
+      await next()
+    })
+  })
   // load router
   const routers = getRouters()
-  console.log(routers, 1111)
   // load middlewares,
   App.use(KoaCompose([...middlewares, ...GlobalDefaultMiddlewares, ...routers]))
   //   start

@@ -1,6 +1,9 @@
 // 订单相关页面
 
-export const config = {}
+import { useContext } from "../../../Gganbu/src/hook"
+import { UploadFile } from "../../../Gganbu/src/framework/koa/middlewares"
+
+// export const config = {}
 
 const logger = async (ctx, next) => {
   const start = Date.now()
@@ -10,22 +13,29 @@ const logger = async (ctx, next) => {
   console.log(`request ${ctx.url} cost ${cost}ms`)
 }
 
-export const getInfo = async (data, data1?: any) => {
+export const getInfo = async ({ hello, world }) => {
+  const ctx = useContext()
   return {
-    data: data,
+    hello,
+    world,
     msg: "99899111",
   }
 }
-getInfo.config = { middlewares: [logger] }
-
-export const createOrder = async (name: string) => {
+export const postInfo = async (data) => {
+  // console.log(data, 191919)
   return {
-    data: name,
-    msg: "测试一样更新",
+    data,
+    msg: "this is post method from server",
   }
 }
+// getInfo.config = { middlewares: [logger] }
 
-export default () => {
-  console.log("export default")
-  return "default"
+export const uploadImage = async (files: any) => {
+  const ctx = useContext()
+  console.log(ctx.method, 12233, 1234)
+  return "this is image uploaded url"
+}
+
+uploadImage.config = {
+  middlewares: [UploadFile()],
 }

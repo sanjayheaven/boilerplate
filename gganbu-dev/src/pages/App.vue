@@ -3,13 +3,13 @@
     Vue3.x项目初始化
     <div>获取的数据</div>
     <div>{{ data }}</div>
-    <input multiple type="file" @change="handleOnChange" />
+    <input name="file" multiple type="file" @change="handleOnChange" />
   </div>
 </template>
 <script lang="ts">
-import { onMounted } from "vue"
-import { getInfo, createOrder } from "../api/manage/order"
-import { uploadApi } from "../api/upload"
+import { instance } from "../../Gganbu/src/request"
+import { getInfo, postInfo, uploadImage } from "../api/manage/order"
+
 export default {
   mounted() {
     this.getInfoFromServer()
@@ -21,15 +21,19 @@ export default {
   },
   methods: {
     async handleOnChange(e) {
-      console.log(e.target.files)
       let files = e.target.files
-      let formData = new FormData()
-      formData.append("files", files)
-      await uploadApi({ hello: formData })
+      console.log(files)
+      let payload = new FormData()
+      payload.append("file", files[0])
+      payload.append("file1", files[1])
+      let res = await uploadImage(payload)
+      this.data = res
     },
     async getInfoFromServer() {
-      let res = await getInfo({ products: 1 })
-      this.data = res
+      // let res = await getInfo({ hello: "helloworld", world: "helloworld" })
+      let res1 = await postInfo({ hello: "hello" })
+      console.log(res1, 19199)
+      this.data = res1
     },
   },
 }
