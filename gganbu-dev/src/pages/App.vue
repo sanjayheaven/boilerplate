@@ -30,8 +30,8 @@ export default {
       this.data = res
     },
     async getInfoFromServer() {
-      // let res = await getInfo({ hello: "helloworld", world: "helloworld" })
-      let res1 = await postInfo({ hello: "hello" })
+      let res1 = await getInfo({ hello: "helloworld", world: "helloworld" })
+      // let res1 = await postInfo({ hello: "hello" })
       console.log(res1, 19199)
       this.data = res1
     },

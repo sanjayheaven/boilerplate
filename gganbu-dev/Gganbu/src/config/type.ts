@@ -12,7 +12,7 @@ export interface ProjectConfig {
   }
   baseURL?: string
   // server relative
-  middlewares?: any[] // global middleware
+  // middlewares?: any[] // global middleware  2.x 移入 Framework setConfig
   plugins?: any[] // plugins
 
   requestConfig?: RequestConfig // axios request config

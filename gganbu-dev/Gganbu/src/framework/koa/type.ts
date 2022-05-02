@@ -32,5 +32,5 @@ export interface Route {
 export interface FrameworkConfig {
   port: Number
   // routerPrefix?: String  // 1.2.x 去除
-  middlewares?: []
+  middlewares?: [] // global middlewares
 }

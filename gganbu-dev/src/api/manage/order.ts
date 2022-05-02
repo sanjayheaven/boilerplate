@@ -13,16 +13,7 @@ const logger = async (ctx, next) => {
   console.log(`request ${ctx.url} cost ${cost}ms`)
 }
 
-export const getInfo = async ({ hello, world }) => {
-  const ctx = useContext()
-  return {
-    hello,
-    world,
-    msg: "99899111",
-  }
-}
 export const postInfo = async (data) => {
-  // console.log(data, 191919)
   return {
     data,
     msg: "this is post method from server",
@@ -35,7 +26,24 @@ export const uploadImage = async (files: any) => {
   console.log(ctx.method, 12233, 1234)
   return "this is image uploaded url"
 }
-
 uploadImage.config = {
   middlewares: [UploadFile()],
+}
+
+import { UserModel } from "../../db/model/user"
+
+export const getInfo = async ({ hello, world }) => {
+  console.log(UserModel, 19191997777)
+  await UserModel.create({
+    username: "this is username",
+    password: "this is password",
+    name: "this is name",
+  })
+  let test = await UserModel.find().limit(1)
+  console.log(test, 9999)
+  return {
+    hello,
+    world,
+    msg: "99899111",
+  }
 }

@@ -9,3 +9,10 @@ export const useContext = () => {
 export const useConfig = () => {
   return als.getStore()["config"]
 }
+
+// only used when upload file
+export const useFiles = () => {
+  let ctx = useContext()
+  return ctx["files"] // ctx.request.files 
+}
+
