@@ -1,42 +1,44 @@
-import mongoose, { Model } from "mongoose"
+import { Model } from "mongoose"
+import path from "path"
 import pluralize from "pluralize"
+import { firstAlphaToUpperCase } from "../../utils"
 
-export const createBasicActions = (model: typeof Model) => {
-  let name = model.modelName
+export const createBasicAction = (
+  module: NodeModule,
+  model: typeof Model
+): object => {
+  let name = path.parse(module.filename).name
   let namePluralize = pluralize(name.toLowerCase())
-  let schema = model.schema
-  let create = `create${model.modelName}`
-  let res = {
-    [create]: async (data: object) => {
+  let Name = firstAlphaToUpperCase(name)
+  let NamePluralize = firstAlphaToUpperCase(namePluralize)
+  return {
+    [`create${Name}`]: async (data: object) => {
       return model.create(data)
     },
-    create: async (data: object) => {
-      return model.create(data)
+    [`get${Name}`]: async ({ _id }) => {
+      return model.findById(_id)
     },
-    delete: async ({ _id }) => {
+    [`delete${Name}`]: async ({ _id }) => {
       return model.deleteOne({ _id })
     },
-    update: async ({ _id, ...data }) => {
+    [`update${Name}`]: async ({ _id, ...data }) => {
       return model.updateOne({ _id }, { $set: { ...data } })
     },
-    getMany: async ({
+
+    [`get${NamePluralize}`]: async ({
       skip = 0,
       limit = 10,
       filters = {},
       sort = { _id: -1 },
     }) => {
-      let totalCount = model.countDocuments(filters)
+      let total = model.countDocuments(filters)
       let items = model.aggregate([
         { $match: filters },
         { $sort: sort },
         { $skip: skip },
         { $limit: limit },
       ])
-      return { totalCount, items }
-    },
-    getOne: async ({ _id }) => {
-      return model.findById({ _id })
+      return { total, items }
     },
   }
-  return res
 }

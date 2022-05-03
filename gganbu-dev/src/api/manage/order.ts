@@ -24,26 +24,22 @@ export const postInfo = async (data) => {
 export const uploadImage = async (files: any) => {
   const ctx = useContext()
   console.log(ctx.method, 12233, 1234)
-  return "this is image uploaded url"
+  return "this is image uploaded url 11"
 }
 uploadImage.config = {
   middlewares: [UploadFile()],
 }
 
-import { UserModel } from "../../db/model/user"
+import { UserModel, UserBasicAction } from "../../db/model/user"
 
 export const getInfo = async ({ hello, world }) => {
-  console.log(UserModel, 19191997777)
+  console.log(UserModel, 19191997777, UserBasicAction)
   await UserModel.create({
     username: "this is username",
-    password: "this is password",
+    password: "this is password1",
     name: "this is name",
   })
   let test = await UserModel.find().limit(1)
-  console.log(test, 9999)
-  return {
-    hello,
-    world,
-    msg: "99899111",
-  }
+  console.log(test, 9998889)
+  return { hello, world, msg: "99899111111" }
 }
