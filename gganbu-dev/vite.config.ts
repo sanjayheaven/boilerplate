@@ -15,4 +15,7 @@ export default defineConfig({
     ],
   },
   // logLevel: "silent",
+  optimizeDeps: {
+    exclude: ["gganbu"],
+  },
 })
