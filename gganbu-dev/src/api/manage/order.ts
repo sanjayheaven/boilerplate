@@ -2,6 +2,7 @@
 
 import { useContext } from "../../../Gganbu/src/hook"
 import { UploadFile } from "../../../Gganbu/src/framework/koa/middlewares"
+import { RedisClient } from "../../../Gganbu/src/cache/redis"
 
 // export const config = {}
 
@@ -40,6 +41,7 @@ export const getInfo = async ({ hello, world }) => {
     name: "this is name",
   })
   let test = await UserModel.find().limit(1)
-  console.log(test, 9998889)
+  await RedisClient.set("hello", "world")
+  console.log(test, 9998889, RedisClient)
   return { hello, world, msg: "99899111111" }
 }
