@@ -2,6 +2,7 @@
   <div>
     Vue3.x项目初始化
     <div>获取的数据</div>
+    <button @click="getInfoFromServer">Refresh</button>
     <div>{{ data }}</div>
     <input name="file" multiple type="file" @change="handleOnChange" />
   </div>

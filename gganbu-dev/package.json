@@ -27,7 +27,7 @@
     "chokidar": "^3.5.3",
     "create-require": "^1.1.1",
     "es-module-lexer": "^0.9.3",
-    "gganbu": "^1.1.17",
+    "gganbu": "^1.1.19",
     "jiti": "^1.10.1",
     "koa": "^2.11.0",
     "koa-body": "^5.0.0",

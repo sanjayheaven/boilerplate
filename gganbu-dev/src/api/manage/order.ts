@@ -1,8 +1,6 @@
 // 订单相关页面
 
-import { useContext } from "../../../Gganbu/src/hook"
-import { UploadFile } from "../../../Gganbu/src/framework/koa/middlewares"
-import { RedisClient } from "../../../Gganbu/src/cache/redis"
+import { useContext } from "gganbu/dist/hook"
 
 // export const config = {}
 
@@ -22,26 +20,17 @@ export const postInfo = async (data) => {
 }
 // getInfo.config = { middlewares: [logger] }
 
-export const uploadImage = async (files: any) => {
-  const ctx = useContext()
-  console.log(ctx.method, 12233, 1234)
-  return "this is image uploaded url 11"
-}
-uploadImage.config = {
-  middlewares: [UploadFile()],
-}
-
 import { UserModel, UserBasicAction } from "../../db/model/user"
 
 export const getInfo = async ({ hello, world }) => {
-  console.log(UserModel, 19191997777, UserBasicAction)
-  await UserModel.create({
-    username: "this is username",
-    password: "this is password1",
-    name: "this is name",
-  })
-  let test = await UserModel.find().limit(1)
-  await RedisClient.set("hello", "world")
-  console.log(test, 9998889, RedisClient)
+  // console.log(UserModel, 19191997777, UserBasicAction)
+  // await UserModel.create({
+  //   username: "this is username",
+  //   password: "this is password1",
+  //   name: "this is name",
+  // })
+  // let test = await UserModel.find().limit(1)
+  // await RedisClient.set("hello", "world")
+  // console.log(test, 9998889, RedisClient)
   return { hello, world, msg: "99899111111" }
 }
